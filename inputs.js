@@ -28,6 +28,15 @@ const starting_questions = [
   },
 ]
 
+const pokemon_questions = [
+  {
+    type: 'list',
+    name: 'pokemon',
+    message: "What pokemon do you want?",
+    choices: ['bulbasaur', 'charmander', 'squirtle'],
+  },
+]
+
 inquirer.prompt(starting_questions).then(answers => {
   const keys = Object.keys(answers);
   keys.forEach(function (key) {
@@ -35,5 +44,13 @@ inquirer.prompt(starting_questions).then(answers => {
     if (key === 'name') {
       console.log(`Hi ${answers.name}! You must be the new ${answers.job}.`);
     }
+  });
+
+  inquirer.prompt(pokemon_questions).then(answers => {
+    const keys = Object.keys(answers);
+    keys.forEach(function (key) {
+      player[key] = answers[key];
+      console.log(`Great choice!  You and ${answers.pokemon} are a great match!`);
+    });
   });
 });
